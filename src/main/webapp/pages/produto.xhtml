@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/template/modeloSistema.xhtml">
+	
+	<ui:define name="menu">
+		<ui:include src="/includes/menuPrincipal.xhtml" />
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<f:event listener="#{MBProduto.carregarListagem}" type="preRenderView"/>
+		<h:form id="frmProdListagem">
+			<p:dataTable id="tblProdListagem"
+						 widgeVar="tabelaProdListagem"
+						 value="#{MBProduto.itens}" var="item"
+						 emptyMessage="Nenhum registro encontrado!"
+						 paginator="true" rows="8"
+						 filteredValue= "#{MBProduto.itensFiltrados}">
+				<f:facet name="header">
+					<h:outputText value="Produto - Listagem" />
+				</f:facet>
+				
+				<p:column headerText="Código" filterBy="#{item.idProduto}" sortBy="#{item.idProduto}">
+					<h:outputText value="#{item.idProduto}" />
+				</p:column>
+				
+				<p:column headerText="Nome"  filterBy="#{item.nome}" sortBy="#{item.nome}">
+					<h:outputText value="#{item.nome}" />
+				</p:column>
+				
+				<p:column headerText="Estoque"  filterBy="#{item.estoque}" sortBy="#{item.estoque}">
+					<h:outputText value="#{item.estoque}" />
+				</p:column>
+				
+				<p:column headerText="Preço"  filterBy="#{item.preco}" sortBy="#{item.preco}">
+					<h:outputText value="#{item.preco}" />
+				</p:column>
+				
+				<p:column headerText="Código do Fabricante"  filterBy="#{item.fabricante.nome}" sortBy="#{item.fabricante.nome}">
+					<h:outputText value="#{item.fabricante.nome}" />
+				</p:column>
+				
+				<f:facet name="footer">
+					<p:commandButton value="Novo" oncomplete="PF('dlgProdNovo').show();"
+							actionListener="#{MBProduto.prepararNovo}"
+							update=":frmProdNovo:pnlProdNovo :msgGlobal"/>
+				
+				</f:facet>
+						 
+			
+			</p:dataTable>
+		</h:form>
+			<p:dialog widgetVar="dlgProdNovo" closabe="false"
+					draggable="false" resizable="false"
+					header="Produto - Novo">
+					<h:form id="frmProdNovo">
+						<h:panelGrid id="pnlProdNovo" columns="2">
+						
+							<p:outputLabel value = "Nome" />
+							<p:inputText value = "#{MBProduto.produto.nome}" maxLength="50" size="30"/>
+						
+							<p:outputLabel value="Estoque" />
+							<p:inputText value="#{MBProduto.produto.estoque}"
+								 size="10"/>
+								 
+							<p:outputLabel value="Preço" />
+							<p:inputText value="#{MBProduto.produto.preco}"
+								 size="10"/>
+							<p:outputLabel value="Fabricante"/>	 
+							<p:selectOneMenu value="#{MBProduto.produto.fabricante.idFabricante}"
+											 filter="true">
+								<f:selectItem itemValue="" itemLabel="Selecione um fabricante"/>
+								<f:selectItems value="#{MBProduto.comboFabricantes}" var="item"
+									itemValue="#{item.idFabricante}" itemLabel="#{item.nome}" />
+							</p:selectOneMenu>
+								 
+						</h:panelGrid>
+						<p:panelGrid columns="2">
+							<p:commandButton value="Gravar" 
+											actionListener="#{MBProduto.novo}"
+											update=":msgGlobal :frmProdListagem:tblProdListagem"
+											oncomplete="PF('dlgProdNovo').hide(); tabelaProdListagem.clearFilters();" />
+							
+							<p:commandButton value="Cancelar" oncomplete="PF('dlgProdNovo').hide();"/>
+						</p:panelGrid>
+					
+					
+					</h:form>
+			
+			
+			</p:dialog>		
+		
+	
+	</ui:define>
+
+
+
+
+
+</ui:composition>
