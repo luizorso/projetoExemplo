@@ -12,8 +12,7 @@ import br.com.drogaria.factory.ConexaoFactory;
 
 public class ProdutoDAO {
 	
-	public void salvar(Produto p)throws SQLException,
-			ClassNotFoundException{
+	public void salvar(Produto p)throws SQLException{
 		String sql = "INSERT INTO produto " +
 					"(nome, estoque, preco, idFabricante) " +
 					"VALUES (?, ?, ?, ?)";
@@ -31,8 +30,7 @@ public class ProdutoDAO {
 		
 	}
 	
-	public void excluir(Produto p)throws SQLException, 
-			ClassNotFoundException{
+	public void excluir(Produto p)throws SQLException{
 		
 		String sql = "DELETE FROM produto WHERE idProduto = ?";
 		Connection conexao = ConexaoFactory.conectar();
@@ -45,8 +43,7 @@ public class ProdutoDAO {
 		
 	}
 	
-	public void alterar(Produto p)throws SQLException, 
-		ClassNotFoundException{
+	public void alterar(Produto p)throws SQLException{
 		
 		String sql = "UPDATE produto set nome = ?, estoque = ?, " + 
 				"preco = ?, idFabricante = ? " + 
@@ -63,8 +60,7 @@ public class ProdutoDAO {
 		
 	}
 	
-	public ArrayList<Produto> getAllProdutos()throws SQLException, 
-		ClassNotFoundException{
+	public ArrayList<Produto> getAllProdutos()throws SQLException{
 		
 		String sql= "SELECT p.idProduto, p.nome, p.estoque, p.preco, " +
 				"f.idFabricante, f.nome " +

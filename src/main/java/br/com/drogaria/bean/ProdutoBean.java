@@ -67,9 +67,7 @@ public class ProdutoBean {
 		try {
 			ProdutoDAO pdao = new ProdutoDAO();
 			itens = pdao.getAllProdutos();
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 			e.printStackTrace();
@@ -81,9 +79,6 @@ public class ProdutoBean {
 			produto = new Produto();
 			FabricanteDAO fdao = new FabricanteDAO();
 			comboFabricantes = fdao.getAllFabricantes();
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 			e.printStackTrace();
@@ -96,16 +91,27 @@ public class ProdutoBean {
 			ProdutoDAO pdao = new ProdutoDAO();
 			pdao.salvar(produto);
 			itens = pdao.getAllProdutos();
-			JSFUtil.adicionarMensagemErro("Produto Salvo com sucesso!");
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
+			JSFUtil.adicionarMensagemSucesso("Produto Salvo com sucesso!");
+		
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 			e.printStackTrace();
 		}
 		
 		
+	}
+	
+	public void excluir() {
+		try {
+			ProdutoDAO pdao = new ProdutoDAO();
+			pdao.excluir(produto);
+			itens = pdao.getAllProdutos();
+			JSFUtil.adicionarMensagemSucesso("Produto excluído com sucesso!");
+			
+		} catch (SQLException e) {
+			JSFUtil.adicionarMensagemErro(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 }

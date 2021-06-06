@@ -50,11 +50,8 @@ public class FabricanteBean {
 			FabricanteDAO fdao = new FabricanteDAO();
 			itens = fdao.getAllFabricantes();
 			
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
 		} catch (SQLException e) {
-			JSFUtil.adicionarMensagemSucesso(e.getMessage());
+			JSFUtil.adicionarMensagemErro(e.getMessage());
 
 		}
 	}
@@ -72,8 +69,6 @@ public class FabricanteBean {
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante salvo com Sucesso!");
 
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 		}
@@ -87,9 +82,7 @@ public class FabricanteBean {
 
 			
 			JSFUtil.adicionarMensagemSucesso("Fabricante excluído com sucesso");
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
+		
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 			e.printStackTrace();
@@ -106,9 +99,7 @@ public class FabricanteBean {
 			
 
 			JSFUtil.adicionarMensagemSucesso("Fabricante atualizado com sucesso!");
-		} catch (ClassNotFoundException e) {
-			JSFUtil.adicionarMensagemErro(e.getMessage());
-			e.printStackTrace();
+	
 		} catch (SQLException e) {
 			JSFUtil.adicionarMensagemErro(e.getMessage());
 			e.printStackTrace();

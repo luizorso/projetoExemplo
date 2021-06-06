@@ -7,7 +7,7 @@ public class JSFUtil {
 	public static void adicionarMensagemSucesso(String mensagem) {
 		FacesMessage msg = new FacesMessage(
 				//Constante, mensagem resumida e a mensagem detalhada
-				FacesMessage.SEVERITY_ERROR, mensagem, mensagem);
+				FacesMessage.SEVERITY_INFO, mensagem, mensagem);
 		//captura o contexto da aplicação
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		//adiciona a mensagem ao contexto da aplicação
@@ -17,7 +17,7 @@ public class JSFUtil {
 	
 	public static void adicionarMensagemErro(String mensagem) {
 		FacesMessage msg = new FacesMessage(
-				FacesMessage.SEVERITY_INFO, mensagem, mensagem);
+				FacesMessage.SEVERITY_ERROR, mensagem, mensagem);
 		FacesContext contexto = FacesContext.getCurrentInstance();
 		contexto.addMessage(null, msg);
 		

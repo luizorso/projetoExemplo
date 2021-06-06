@@ -40,8 +40,17 @@
 					<h:outputText value="#{item.preco}" />
 				</p:column>
 				
-				<p:column headerText="Código do Fabricante"  filterBy="#{item.fabricante.nome}" sortBy="#{item.fabricante.nome}">
+				<p:column headerText="Fabricante"  filterBy="#{item.fabricante.nome}" sortBy="#{item.fabricante.nome}">
 					<h:outputText value="#{item.fabricante.nome}" />
+				</p:column>
+				<p:column headertext="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						oncomplete="PF('dlgProdExcluir').show();"
+						update=":frmProdExcluir:pnlProdExcluir">
+						<f:setPropertyActionListener value="#{item}" 
+							target="#{MBProduto.produto}"/>
+					</p:commandButton>
+				
 				</p:column>
 				
 				<f:facet name="footer">
@@ -93,6 +102,40 @@
 			
 			
 			</p:dialog>		
+			<p:dialog widgetVar="dlgProdExcluir" closabe="false" 
+						draggable="false" resizable="false"
+						header="Produto - Excluir"
+						modal="true" appendTo="@(body)">
+			<h:form id="frmProdExcluir">
+				<p:panelGrid id="pnlProdExcluir" columns="2">
+					<p:outputLabel value="Código"/>
+					<h:outputText value="#{MBProduto.produto.idProduto}"/>
+					
+					<p:outputLabel value="Nome"/>
+					<h:outputText value="#{MBProduto.produto.nome}"/>
+					
+					<p:outputLabel value="Preço"/>
+					<h:outputText value="#{MBProduto.produto.preco}"/>
+					
+					<p:outputLabel value="Estoque"/>
+					<h:outputText value="#{MBProduto.produto.estoque}"/>
+					
+					<p:outputLabel value="Fabricante"/>
+					<h:outputText value="#{MBProduto.produto.fabricante.nome}" />
+				</p:panelGrid>
+				<p:panelGrid>
+					<p:commandButton value="Excluir" 
+						actionListener="#{MBProduto.excluir}"
+						update=":msgGlobal :frmProdListagem:tblProdListagem"
+						oncomplete="PF('dlgProdExcluir').hide(); PF('tabelaProdListagem').clearFilters();"/>
+					<p:commandButton value="Cancelar" 
+						oncomplete="PF('dlgProdExcluir').hide();"/>
+				</p:panelGrid>
+			
+			</h:form>
+			
+			
+			</p:dialog>
 		
 	
 	</ui:define>

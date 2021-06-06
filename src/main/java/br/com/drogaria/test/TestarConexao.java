@@ -19,11 +19,7 @@ public class TestarConexao {
 			JOptionPane.showMessageDialog(
 					null, "Erro ao conectar com a base de dados: " 
 							+ e.getMessage());
-		} catch(ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(
-					null, "Erro ao registrar o Driver: " 
-							+ e.getMessage());
-		}
+		} 
 
 	}
 

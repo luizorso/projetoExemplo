@@ -11,8 +11,7 @@ import br.com.drogaria.factory.ConexaoFactory;
 
 public class FabricanteDAO {
 	
-	public void salvar(Fabricante f) throws SQLException,
-			ClassNotFoundException{
+	public void salvar(Fabricante f) throws SQLException{
 		
 		String sql = "INSERT INTO fabricante (nome) VALUES (?)";
 		Connection conexao = ConexaoFactory.conectar();
@@ -24,8 +23,7 @@ public class FabricanteDAO {
 		
 	}
 	
-	public void excluir(Fabricante f) throws SQLException,
-		ClassNotFoundException{
+	public void excluir(Fabricante f) throws SQLException{
 		
 		String sql = "DELETE FROM fabricante WHERE idFabricante = ?";
 		Connection conexao = ConexaoFactory.conectar();
@@ -37,8 +35,7 @@ public class FabricanteDAO {
 		
 	}
 	
-	public void alterar(Fabricante f)throws SQLException,
-		ClassNotFoundException{
+	public void alterar(Fabricante f)throws SQLException{
 		
 		String sql = "UPDATE fabricante SET nome = ? WHERE idFabricante = ?";
 		
@@ -53,8 +50,7 @@ public class FabricanteDAO {
 		
 	}
 	
-	public Fabricante getFabricantePorId(Fabricante f) throws SQLException,
-		ClassNotFoundException{
+	public Fabricante getFabricantePorId(Fabricante f) throws SQLException{
 		
 		String sql = "SELECT idFabricante, nome " +
 					 "FROM fabricante WHERE idFabricante = ?";
@@ -80,8 +76,7 @@ public class FabricanteDAO {
 		
 	}
 	
-	public ArrayList<Fabricante> getAllFabricantes()throws SQLException,
-		ClassNotFoundException{
+	public ArrayList<Fabricante> getAllFabricantes()throws SQLException{
 		
 		String sql = "SELECT idFabricante, nome FROM fabricante";
 		Connection conexao = ConexaoFactory.conectar();
@@ -103,7 +98,7 @@ public class FabricanteDAO {
 	}
 	
 	public ArrayList<Fabricante> getFabricantePorNome(Fabricante f)
-			throws SQLException, ClassNotFoundException{
+			throws SQLException{
 		
 		String sql = "SELECT idFabricante, nome FROM fabricante " +
 					"WHERE nome LIKE ?";
